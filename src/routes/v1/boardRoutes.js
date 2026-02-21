@@ -1,14 +1,14 @@
-import express from "express";
-import { StatusCodes } from "http-status-codes";
+import express from 'express';
+import { StatusCodes } from 'http-status-codes';
 
 const Router = express.Router();
 
-Router.route("/")
+Router.route('/')
   .get((req, res) => {
-    res.status(StatusCodes.OK).json({ message: "GET: APT get list boards" });
+    res.status(StatusCodes.OK).json({ message: 'GET: APT get list boards' });
   })
   .post((req, res) => {
-    res.status(StatusCodes.CREATED).json({ message: "POST: API create new board" });
+    res.status(StatusCodes.CREATED).json({ message: 'POST: API create new board' });
   });
 
 export const boardRoutes = Router;

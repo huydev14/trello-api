@@ -1,12 +1,12 @@
-import express from "express";
-import { StatusCodes } from "http-status-codes";
-import { boardRoutes } from "~/routes/v1/boardRoutes";
+import express from 'express';
+import { StatusCodes } from 'http-status-codes';
+import { boardRoutes } from '~/routes/v1/boardRoutes';
 
 const Router = express.Router();
 
 // Check API v1/status
-Router.get("/status", (req, res) => {
-  res.status(StatusCodes.OK).json({ message: "APIs V1 are ready to use." });
+Router.get('/status', (req, res) => {
+  res.status(StatusCodes.OK).json({ message: 'APIs V1 are ready to use.' });
 });
 
 // Board APIs

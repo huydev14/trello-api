@@ -19,5 +19,7 @@ module.exports = {
     "func-names": "off",
     "no-process-exit": "off",
     "import/prefer-default-export": "off",
+    "import/no-extraneous-dependencies": "off",
+    quotes: ["error", "single"],
   },
 };
