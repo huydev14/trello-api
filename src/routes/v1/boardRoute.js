@@ -11,4 +11,4 @@ Router.route('/')
     res.status(StatusCodes.CREATED).json({ message: 'POST: API create new board' });
   });
 
-export const boardRoutes = Router;
+export const boardRoute = Router;
