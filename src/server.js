@@ -5,27 +5,30 @@ import { env } from '~/config/environment';
 import { API_V1 } from '~/routes/v1';
 
 const START_SERVER = () => {
-  const app = express();
+    const app = express();
 
-  app.use('/v1', API_V1);
+    // Enable req.body json data
+    app.use(express.json());
 
-  app.listen(env.APP_PORT, env.APP_HOST, () => {
-    console.log(`Server is running at http://${env.APP_HOST}:${env.APP_PORT}/`);
-  });
+    app.use('/v1', API_V1);
 
-  exitHook((done) => {
-    console.log('Disconnecting from MongoDB Cloud Atlas!');
-    CLOSE_DB().then(() => done());
-  });
+    app.listen(env.APP_PORT, env.APP_HOST, () => {
+        console.log(`Server is running at http://${env.APP_HOST}:${env.APP_PORT}/`);
+    });
+
+    exitHook((done) => {
+        console.log('Disconnecting from MongoDB Cloud Atlas!');
+        CLOSE_DB().then(() => done());
+    });
 };
 
 (async () => {
-  try {
-    await CONNECT_DB();
-    console.log('Connected to MongoDB Cloud Atlas!');
-    START_SERVER();
-  } catch (error) {
-    console.error(error);
-    process.exit(0);
-  }
+    try {
+        await CONNECT_DB();
+        console.log('Connected to MongoDB Cloud Atlas!');
+        START_SERVER();
+    } catch (error) {
+        console.error(error);
+        process.exit(0);
+    }
 })();
