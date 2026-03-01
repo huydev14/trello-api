@@ -3,6 +3,8 @@ import exitHook from 'async-exit-hook';
 import { CONNECT_DB, CLOSE_DB } from '~/config/mongodb';
 import { env } from '~/config/environment';
 import { API_V1 } from '~/routes/v1';
+import { StatusCodes } from 'http-status-codes';
+import { errorHandlingMiddleware } from '~/middlewares/errorHandlingMiddleware';
 
 const START_SERVER = () => {
     const app = express();
@@ -10,7 +12,11 @@ const START_SERVER = () => {
     // Enable req.body json data
     app.use(express.json());
 
+    // Route v1
     app.use('/v1', API_V1);
+
+    // Error handler
+    app.use(errorHandlingMiddleware);
 
     app.listen(env.APP_PORT, env.APP_HOST, () => {
         console.log(`Server is running at http://${env.APP_HOST}:${env.APP_PORT}/`);
