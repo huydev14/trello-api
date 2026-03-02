@@ -1,4 +1,5 @@
 import { StatusCodes } from 'http-status-codes';
+import { env } from '~/config/environment';
 
 export const errorHandlingMiddleware = (err, req, res, next) => {
     // Default error status 500
@@ -9,6 +10,8 @@ export const errorHandlingMiddleware = (err, req, res, next) => {
         message: err.message || StatusCodes[err.statusCode],
         stack: err.stack,
     };
+
+    if(env.BUILD_MODE != 'dev') delete responseError.stack 
 
     res.status(responseError.statusCode).json(responseError);
 };
