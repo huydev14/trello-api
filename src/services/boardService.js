@@ -8,9 +8,16 @@ const createNew = async (reqBody) => {
             ...reqBody,
             slug: slugify(reqBody.title),
         };
+
+        // Insert new document to db
         const createdBoard = await boardModel.createNew(data);
         console.log(createdBoard);
-        return createdBoard;
+
+        // Get created document
+        const getNewBoard = await boardModel.findOneById(createdBoard.insertedId);
+        console.log(getNewBoard);
+
+        return getNewBoard;
     } catch (error) {
         throw error;
     }
