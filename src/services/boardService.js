@@ -4,6 +4,7 @@ import { boardModel } from '~/models/boardModel';
 
 const createNew = async (reqBody) => {
     try {
+        // Data
         const data = {
             ...reqBody,
             slug: slugify(reqBody.title),
@@ -11,13 +12,12 @@ const createNew = async (reqBody) => {
 
         // Insert new document to db
         const createdBoard = await boardModel.createNew(data);
-        console.log(createdBoard);
 
         // Get created document
         const getNewBoard = await boardModel.findOneById(createdBoard.insertedId);
-        console.log(getNewBoard);
 
         return getNewBoard;
+
     } catch (error) {
         throw error;
     }
